@@ -120,3 +120,4 @@ usaremos en metodo update, que se conforma por dos operaciones, la primera es bu
 - *npm i react-hook-form*
 - *npm i react-router-dom*
 - *npm i axios*
+- *npm i js-cookie* //para leer las cockies
