@@ -1,8 +1,9 @@
 //importo el modelo User para crear usuario
 const User = require('../models/user.model')
 const bcrypt = require('bcryptjs')
-const { createAccesToken } = require('../libs/jwt')
-
+const { createAccesToken } = require('../libs/jwt');
+const jwt = require('jsonwebtoken');
+const { tokenSecret } = require('../config')
 
 const register = async (req, res) => {
     try {
@@ -81,9 +82,27 @@ const profile = async (req, res) => {
 
 }
 
+const verifyToken = async (req, res) => {
+    const { token } = req.cookies
+    if (!token) return res.status(401).json({ message: "Unauthorized" })
+
+    jwt.verify(token, tokenSecret, async (err, user) => {
+        if (err) return res.status(401).json({ message: 'Unauthorized' })
+
+        const userFound = await User.findById(user.id)
+        if (!userFound) return res.status(401).json({ message: 'Unauthorized' })
+
+        return res.json({
+            id: userFound._id,
+            username: userFound.username,
+            email: userFound.email
+        });
+
+    });
+};
 
 
 
 
 
-module.exports = { register, login, logout, profile }
+module.exports = { register, login, logout, profile, verifyToken }

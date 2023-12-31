@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 
 const API = 'http://localhost:3001/api';
 
@@ -11,7 +11,7 @@ export const registerRequest = async (user) => {
     };
 
     try {
-        const res = await axios.post(`${API}/register`, info);
+        const res = await axios.post(`/register`, info);
         return res.data;
     } catch (error) {
         console.error('Error en la petición:', error);
@@ -25,10 +25,13 @@ export const loginRequest = async (user) => {
     };
 
     try {
-        const res = await axios.post(`${API}/login`, info);
+        const res = await axios.post(`/login`, info);
         return res;
     } catch (error) {
         console.error('Error en la petición:', error);
         throw error;
     }
 };
+
+
+export const verifyTokenRequest = () => axios.get('/verify')

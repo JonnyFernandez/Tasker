@@ -1,11 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest, loginRequest } from "../api/auth";
+import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth";
 import Cookies from 'js-cookie'
 
 export const AuthContex = createContext({
-    // signup: () => { },
-    // user: '',
-    // isAutenticated: false
+
 })
 
 
@@ -18,7 +16,8 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [isAutenticated, setIsAutenticated] = useState(false)
     const [errors, setErrors] = useState([])
-    console.log(user);
+    const [Loading, setLoading] = useState(true)
+    // console.log(user);
     const signup = async (values) => {
         try {
             const res = await registerRequest(values);
@@ -55,17 +54,48 @@ export const AuthProvider = ({ children }) => {
     }, [errors])
 
 
-    // useEffect(() => {
-    //     const cookies = Cookies.get()
-    //     if (cookies.toekn) {
-    //         console.log(cookies.token);
-    //     }
-    // }, [])
+    useEffect(() => {
+        async function checkLogin() {
+            const cookies = Cookies.get()
+
+            if (!cookies.token) {
+                setIsAutenticated(false);
+                setLoading(false)
+                return setUser(null);
+            }
+
+            try {
+                const res = await verifyTokenRequest(cookies.token);
+                if (!res.data) {
+                    setIsAutenticated(false)
+                    setLoading(false)
+                    return
+                }
+                setIsAutenticated(true)
+                setUser(res.data);
+                setLoading(false)
+
+            } catch (error) {
+                console.log(error);
+                setIsAutenticated(false)
+                setUser(null)
+                setLoading(false)
+
+            }
+        }
+        checkLogin()
+    }, [])
+
+
+
+
+
+
 
 
 
     return (
-        <AuthContex.Provider value={{ signup, signin, user, isAutenticated, errors }}>
+        <AuthContex.Provider value={{ signup, signin, user, isAutenticated, errors, Loading }}>
             {children}
         </AuthContex.Provider>
     )
