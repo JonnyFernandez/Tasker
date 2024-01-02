@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage"
 import HomePage from "./pages/HomePage"
 import ProtectedRoute from "./ProtectedRoutes"
 import { TaskProvider } from "./context/TaskContext"
+import NavBar from "./components/NavBar"
 
 
 
@@ -17,6 +18,7 @@ export default function App() {
       <TaskProvider>
 
         <BrowserRouter>
+          <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
