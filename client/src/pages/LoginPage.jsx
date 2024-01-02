@@ -9,7 +9,7 @@ const LoginPage = () => {
 
     const { signin, isAutenticated, errors: signinrErrors } = useAuth()
 
-    // console.log(isAutenticated);
+
     useEffect(() => {
         if (isAutenticated) navigate('/task')
     }, [isAutenticated])

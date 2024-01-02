@@ -9,7 +9,8 @@ const RegisterPage = () => {
 
     const { signup, isAutenticated, errors: RegisterErrors } = useAuth()
 
-    console.log(isAutenticated);
+
+
     useEffect(() => {
         if (isAutenticated) navigate('/task')
     }, [isAutenticated])
