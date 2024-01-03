@@ -25,7 +25,7 @@ const LoginPage = () => {
                 {
                     signinrErrors.length >= 1 ? signinrErrors.map((item, i) => <div key={i} className='bg-red-500 p-2 text-white text-center'>{item}</div>) : ''
                 }
-                <h1 className='text-2xl font-bold'>Login</h1>
+                <h1 className='text-3xl font-bold'>Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type='email'
@@ -43,7 +43,7 @@ const LoginPage = () => {
                     {errors.password && <p className='text-red-500'>password is required</p>}
 
 
-                    <button type='submit'>Login</button>
+                    <button type='submit' className='bg-sky-500 text-white px-7 py-2 rounded-md my-2'>Login</button>
                 </form>
                 <p className='flex gap-x-2 justify-between'>Don´t have acount? <Link className='text-sky-500' to={'/register'}>Sign up</Link> </p>
             </div>

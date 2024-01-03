@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useTasks } from "../context/TaskContext"
-import { Navigate } from "react-router-dom"
+import TaskCard from "../components/TaskCard"
 
 const TaskPage = () => {
     const { getTasks, tasks } = useTasks()
@@ -14,13 +14,10 @@ const TaskPage = () => {
 
 
     return (
-        <div>
+        <div className="grid  grid-cols-3 gap-2" >
             {
                 tasks && tasks.map(item =>
-                (<div key={item._id}>
-                    <h1>{item.title}</h1>
-                    <p>{item.description}</p>
-                </div>)
+                    <TaskCard task={item} key={item._id} />
                 )
             }
         </div>
