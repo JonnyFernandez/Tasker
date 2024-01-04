@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const router = require('../src/routes/auth.routes')
 const routerTasks = require('./routes/tasks.routes')
+const routerCheck = require('./routes/check.routes')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
@@ -19,5 +20,6 @@ app.use((req, res, next) => {
 });
 app.use('/api', router)
 app.use('/api', routerTasks)
+app.use('/api', routerCheck)
 
 module.exports = app
