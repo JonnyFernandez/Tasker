@@ -7,7 +7,7 @@ const TaskCard = (props) => {
     const { deleteTask } = useTasks();
 
 
-    const [check, setCheck] = useState(false)
+    const [check, setCheck] = useState(true)
 
     const confirmDelete = async () => {
         const result = await Swal.fire({
