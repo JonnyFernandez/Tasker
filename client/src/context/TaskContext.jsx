@@ -10,7 +10,7 @@ export const TaskProvider = ({ children }) => {
 
     const createTask = async (task) => {
         const res = await createTaskRequest(task)
-        console.log(res);
+        // console.log(res);
     }
 
     const getTasks = async () => {

@@ -1,13 +1,40 @@
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import { useTasks } from '../context/TaskContext';
 import { BsCheckCircle, BsCircle } from 'react-icons/bs';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useTasks } from '../context/TaskContext';
+import { useChecks } from '../context/Check.Context';
+
+
+
+
 const TaskCard = (props) => {
+    // console.log(props);
     const { deleteTask } = useTasks();
+    const { checks, createCheck, deleteOne } = useChecks()
+    //  -------------------------------------------------
+    const myChecks = checks;
+    const [check, setCheck] = useState(false)
 
+    const handleCheck = () => {
+        if (check) {
+            setCheck(false)
+            deleteOne(props.task._id, { check: false })
+        } else {
+            setCheck(true)
+            createCheck(props.task._id, { check: true })
+        }
+    };
 
-    const [check, setCheck] = useState(true)
+    useEffect(() => {
+        myChecks.forEach((fav) => {
+            if (fav._id === props.task._id) {
+                setCheck(true);
+            }
+        });
+    }, [myChecks]);
+    //  -------------------------------------------------
+
 
     const confirmDelete = async () => {
         const result = await Swal.fire({
@@ -47,15 +74,9 @@ const TaskCard = (props) => {
             <p className="text-slate-300">{props.task.description}</p>
             <p>{new Date(props.task.date).toLocaleDateString()}</p>
             <div className="absolute bottom-0 right-0 flex gap-x-2 p-2">
-                {check === true ? (
-                    <button onClick={() => checkTask(false)}>
-                        <BsCheckCircle className="text-green-500" />
-                    </button>
-                ) : (
-                    <button onClick={() => checkTask(true)}>
-                        <BsCircle className="text-gray-500" />
-                    </button>
-                )}
+                {check
+                    ? (<button onClick={handleCheck}> <BsCheckCircle className="text-green-500" /> </button>)
+                    : (<button onClick={handleCheck}> <BsCircle className="text-gray-500" /> </button>)}
             </div>
         </div>
     );

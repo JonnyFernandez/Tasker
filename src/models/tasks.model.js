@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
 
-
 const taskSchema = new mongoose.Schema({
     title: {
         type: String,
-        require: true,
+        required: true, // Corregido
     },
     description: {
         type: String,
         required: true,
+    },
+    check: {
+        type: Boolean,
+        default: false,
     },
     date: {
         type: Date,
@@ -18,10 +21,7 @@ const taskSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,
-
     }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Task', taskSchema)
-
-
