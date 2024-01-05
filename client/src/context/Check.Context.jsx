@@ -7,7 +7,6 @@ export const CheckProvider = ({ children }) => {
 
     const [checks, setChecks] = useState([])
 
-    console.log(checks);
 
     const createCheck = async (id, task) => {
         // console.log(task);
@@ -26,6 +25,7 @@ export const CheckProvider = ({ children }) => {
             try {
                 const res = await getChecks()
                 const info = res.data
+                // console.log(info);
                 if (info.length > 0) {
                     setChecks(info.filter(item => item.check === true))
                 } else {
@@ -48,10 +48,19 @@ export const CheckProvider = ({ children }) => {
         }
     }
 
+    const refresh = async () => {
+        try {
+            const res = await getChecks()
+            const info = res.data
+            setChecks(info.filter(item => item.check === true))
+        } catch (error) {
+            console.log(error);
 
+        }
+    }
 
     return (
-        <CheckContext.Provider value={{ checks, createCheck, deleteOne }}>
+        <CheckContext.Provider value={{ checks, createCheck, deleteOne, refresh }}>
             {children}
         </CheckContext.Provider>
     )

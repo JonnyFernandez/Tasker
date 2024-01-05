@@ -9,9 +9,8 @@ import { useChecks } from '../context/Check.Context';
 
 
 const TaskCard = (props) => {
-    // console.log(props);
     const { deleteTask } = useTasks();
-    const { checks, createCheck, deleteOne } = useChecks()
+    const { checks, createCheck, deleteOne, refresh } = useChecks()
     //  -------------------------------------------------
     const myChecks = checks;
     const [check, setCheck] = useState(false)
@@ -33,6 +32,8 @@ const TaskCard = (props) => {
             }
         });
     }, [myChecks]);
+
+
     //  -------------------------------------------------
 
 
