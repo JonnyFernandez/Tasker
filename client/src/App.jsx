@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoutes"
 import { TaskProvider } from "./context/TaskContext"
 import { CheckProvider } from "./context/Check.Context"
 import NavBar from "./components/NavBar"
+import CheckPage from "./pages/ChecksPage"
 
 
 
@@ -32,6 +33,8 @@ export default function App() {
                   <Route path="/addtask" element={<TaskFormPage />} />
                   <Route path="/tasks/:id" element={<TaskFormPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/checks" element={<CheckPage />} />
+
                 </Route>
               </Routes>
             </main>

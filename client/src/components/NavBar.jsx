@@ -34,7 +34,7 @@ const NavBar = () => {
             <ul className="flex gap-x-2">
                 {isAutenticated ? <>
                     <li>
-                        <Link className="bg-indigo-500 px-4 py-1 rounded-sm">Checks</Link>
+                        <Link to={'/checks'} className="bg-indigo-500 px-4 py-1 rounded-sm">Checks</Link>
                     </li>
                     <li>
                         <Link to={'/Profile'} className="bg-indigo-500 px-4 py-1 rounded-sm">Profile</Link>
