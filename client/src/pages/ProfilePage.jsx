@@ -8,10 +8,11 @@ import { useTasks } from "../context/TaskContext";
 const ProfilePage = () => {
 
     const { user } = useAuth()
-    const { checks } = useChecks()
+    const { checks, refresh } = useChecks()
     const { tasks, getTasks } = useTasks()
     useEffect(() => {
         getTasks()
+        refresh()
     }, [])
 
 
