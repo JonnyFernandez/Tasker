@@ -1,6 +1,7 @@
 const Task = require('../models/tasks.model')
 
 const getTasks = async (req, res) => {
+
     try {
         const tasks = await Task.find({ user: req.user.id }).populate('user') //asi limito que no salgan tareas de otros usuarios, al agregar populate("user") me trae tambien la info del usuario
         res.json(tasks)
