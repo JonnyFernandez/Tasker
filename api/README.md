@@ -1,23 +1,3 @@
-
-# **Notas Backend**
- 
-# Modulos 
-- **route**: aca va toda las rutas
-
-- **controllers**: Donde desarrolaremos las conexiones con la db 
-
-- **models**:  Modelos de datos en la base de datos
-
-- **meddlewares**: autenticaciones para acceder a rutas protegidas
-
-- **schemas**: validaciones, datos
-
-- **libs**: codigo que podemos reutilizar varias veces, ejemplo tokes
-
-- **db.js**: sera donde va el codigo de la base de datos
-
-- **config.js**: configuraciones o funciones que los demas archivos puede requerir
-
 # Comandos Mongosh
 1) CREO BASE DE DATOS:  
 - **use mystore**
